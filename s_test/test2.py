@@ -11,6 +11,7 @@ cv2.line(img, (200, 200), (200, 400), (255, 255, 255))
 cv2.line(img, (200, 400), (400, 400), (255, 255, 255))
 cv2.line(img, (400, 400), (400, 100), (255, 255, 255))
 
-cv2.imshow('test',img)
+cv2.imshow('test', img)
+cv2.imwrite('test2_out.png', img)
 cv2.waitKey(5000)
 cv2.destroyAllWindows()
