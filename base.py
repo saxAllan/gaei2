@@ -1,11 +1,11 @@
 import numpy as np
 import cv2
 
-size = 20
-amo = 10
-wait = 50
-goal_x = 9
-goal_y = 5
+size = 20 #1セルの幅（描画にしか関係ない）
+amo = 10 #セルの縦横の数
+wait = 30 #0で毎回ユーザからの操作待ち、1以上でその秒数待つ（描画）
+goal_x = 9 #ゴールの座標x
+goal_y = 5 #ゴールの座標y
 
 next = [] #次訪問したいリスト[x,y]
 dp = [[[0,0] for i in range(amo)] for j in range(amo)] #[cost, visited]
@@ -116,7 +116,7 @@ def searchRoute(glx,gly):
             lin(glx,gly,x,y)
 
 searchRoute(goal_x,goal_y)
-for i in range(10,0,-1):
+for i in range(dp[goal_x][goal_y][0]-1,0,-1):
     for elm in route[i]:
         cv2.imshow('image', img)
         cv2.waitKey(wait)
