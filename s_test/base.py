@@ -2,10 +2,10 @@ import numpy as np
 import cv2
 
 size = 20 #1セルの幅（描画にしか関係ない）
-amo = 10 #セルの縦横の数
-wait = 30 #0で毎回ユーザからの操作待ち、1以上でその秒数待つ（描画）
-goal_x = 9 #ゴールの座標x
-goal_y = 5 #ゴールの座標y
+amo = 20 #セルの縦横の数（初期10）
+wait = 10 #0で毎回ユーザからの操作待ち、1以上でその秒数待つ（描画）
+goal_x = 19 #ゴールの座標x（初期9）
+goal_y = 1 #ゴールの座標y（初期5）
 
 next = [] #次訪問したいリスト[x,y]
 dp = [[[0,0] for i in range(amo)] for j in range(amo)] #[cost, visited]
@@ -73,7 +73,9 @@ def search(stx,sty):
         if(x<0 or x>=amo): #範囲外
             continue
         for j in range(-1,2):
-            y = sty+j
+            y = sty + j
+            if (i % 2 == 1 and j % 2 == 1): #以下2行追記（斜めスキップ）
+                continue           
             if(y<0 or y>=amo): #範囲外
                 continue
             elif(x==stx and y==sty): #自分自身
@@ -95,7 +97,8 @@ while(len(next)!=0):
     del next[0]
 
 route = [[] for i in range(dp[goal_x][goal_y][0])]
-def searchRoute(glx,gly):
+def searchRoute(glx, gly):
+    flag=0
     for i in range(-1,2):
         x = glx-i
         if(x<0 or x>=amo): #範囲外
@@ -113,18 +116,21 @@ def searchRoute(glx,gly):
             #rect(x,y,(255,204,255))
             if([x,y] not in route[dp[x][y][0]]):
                 route[dp[x][y][0]].append([x,y])
-            lin(glx,gly,x,y)
+            lin(glx, gly, x, y)
+            return -1  #追記（1通りを選ぶため）
 
-searchRoute(goal_x,goal_y)
+searchRoute(goal_x, goal_y)
+
 for i in range(dp[goal_x][goal_y][0]-1,0,-1):
     for elm in route[i]:
         cv2.imshow('image', img)
         cv2.waitKey(wait)
-        searchRoute(elm[0],elm[1])
-
+        searchRoute(elm[0], elm[1])
+        break #追記（1通りに絞るため）
+        
 cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 print(dp)
 print("route")
 print(route)
+cv2.waitKey(0) #入れ替え
+cv2.destroyAllWindows()
