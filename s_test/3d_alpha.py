@@ -1,14 +1,11 @@
-#2d.py ver 0.1 20200507
+#3d_alpha.py ver 0.3 20200521
 
 import numpy as np
-#import cv2
 
-#size = 20  # 1セルの幅（描画にしか関係ない）
 amo = 4  # セルの縦横高さの値（初期4）
-#wait = 0  # 0で毎回ユーザからの操作待ち、1以上でその秒数待つ（描画）
-goal_x = 4  # ゴールの座標x
-goal_y = 4  # ゴールの座標y
-goal_z = 4  # ゴールの座標z
+goal_x = 3  # ゴールの座標x
+goal_y = 3  # ゴールの座標y
+goal_z = 3  # ゴールの座標z
 start_x = 0
 start_y = 0
 start_z = 0
@@ -16,11 +13,9 @@ start_z = 0
 next = []  # 次訪問したいリスト[x,y]
 dp = [[[[0, 0] for i in range(amo)] for j in range(amo)] for k in range(amo)]  # [cost, visited]
 
-#削除01
-
 def startInit(x, y, z):
     dp[x][y][z][1] = 1  # Startはvisited:=1
-    next.append([x, y])
+    next.append([x, y, z])
 
 def goalInit(x, y, z):
     dp[x][y][z][1] = 2  # Goalはvisited:=2
@@ -94,14 +89,14 @@ def searchRoute(glx, gly, glz):
                 z = glz - k
                 if (z < 0 or z >= amo):
                     continue
-                elif(x == glx and y == gly):  # 自分自身
+                elif(x == glx and y == gly and z == glz):  # 自分自身
                     continue
-                elif(dp[x][y][1] == 6):  # 障害物(6)
+                elif(dp[x][y][z][1] == 6):  # 障害物(6)
                     continue
-                elif(dp[glx][gly][0]-1 != dp[x][y][0]):
+                elif(dp[glx][gly][glz][0]-1 != dp[x][y][z][0]):
                     continue
-                if([x, y] not in route[dp[x][y][0]]):
-                    route[dp[x][y][0]].append([x, y])
+                if ([x, y, z] not in route[dp[x][y][z][0]]): # よくわからん
+                    route[dp[x][y][z][0]].append([x, y, z])
                 return -1  # 追記（1通りを選ぶため）
 
 searchRoute(goal_x, goal_y, goal_z)
@@ -114,3 +109,15 @@ for i in range(dp[goal_x][goal_y][goal_z][0]-1, 0, -1):
 print(dp)
 print("route")
 print(route)
+
+'''
+
+[[[[0, 1], [1, 11], [1, 11], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 11]],  [[1, 11], [1, 11], [1, 11], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 11]]], 
+[[[1, 11], [1, 11], [1, 11], [1, 11]], [[1, 11], [0, 6], [0, 6], [1, 11]], [[1, 11], [0, 6], [0, 6], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 11]]], 
+[[[1, 11], [1, 11], [1, 11], [1, 11]], [[1, 11], [0, 6], [0, 6], [1, 11]], [[1, 11], [0, 6], [0, 6], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 11]]], 
+[[[1, 11], [1, 11], [1, 11], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 11]], [[1, 11], [1, 11], [1, 11], [1, 16]]]]
+
+
+
+
+'''
