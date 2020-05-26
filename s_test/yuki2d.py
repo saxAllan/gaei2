@@ -5,10 +5,10 @@ import numpy as np
 import cv2
 import os
 
-def search_2d(size, amo, wait, goal_x, goal_y, start_x, start_y,):
-    #size = 50  # 1セルの幅（描画にしか関係ない）
+def search_2d(amo, goal_x, goal_y, start_x, start_y,):
+    size = 50  # 1セルの幅（描画にしか関係ない）
     #amo = 8  # セルの縦横の数（初期10）
-    wait = 0  # 0で毎回ユーザからの操作待ち、1以上でその秒数待つ（描画）
+    wait = 10  # 0で毎回ユーザからの操作待ち、1以上でその秒数待つ（描画）
     #goal_x = 1  # ゴールの座標x※0.2追記始終点入替
     #goal_y = 5  # ゴールの座標y※0.2追記始終点入替
     #start_x = 4  # スタートの座標x（初期9）※0.2追記始終点入替
@@ -71,18 +71,20 @@ def search_2d(size, amo, wait, goal_x, goal_y, start_x, start_y,):
         dp[x][y][1] = 2  # Goalはvisited:=2
         rect(x, y, col)
 
+    '''
     def obstInit(x1, y1, x2, y2):
         col = (128, 128, 128)
         for i in range(x1, x2+1):
             for j in range(y1, y2+1):
                 dp[i][j][1] = 6  # Obstはvisited:=6
                 rect(i, j, col)
+    '''
 
     # Init
     grid()
     startInit(goal_x, goal_y)
     goalInit(start_x, start_y)
-    obstInit(2, 3, 3, 6)  # 障害物
+    #obstInit(2, 3, 3, 6)  # 障害物
     sv_count = show(sv_count)
 
     def search(stx, sty):
@@ -150,8 +152,9 @@ def search_2d(size, amo, wait, goal_x, goal_y, start_x, start_y,):
             break  # 追記（1通りに絞るため）
 
     cv2.imshow('image', img)
-    print(dp)
-    print("route")
-    print(route)
+    #print(dp)
+    print("yuki2d completed")
+    return route
+    #print(route)
     cv2.waitKey(0)  # 入れ替え
     cv2.destroyAllWindows()
