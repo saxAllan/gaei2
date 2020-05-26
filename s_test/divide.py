@@ -31,7 +31,7 @@ area_start_x = start_x // area_size
 area_start_y = start_y // area_size
 
 area_route_org = yuki2d.search_2d(area_amo, area_goal_x, area_goal_y, area_start_x, area_start_y) # エリアの経路探索
-print(area_route_org)
+#print(area_route_org)
 
 # yuki2dからの戻り値をnpに変換
 order = len(area_route_org)
@@ -47,15 +47,16 @@ current_z = np.zeros(order, dtype=int)
 for i in range(order-1):
     current_z[i] = start_z + math.ceil(z_diff_area * (i + 1) / order)
 current_z[order - 1] = goal_z
-print(current_z)  # current_zには各エリア最終点における高度を格納（ただし、S/Gのエリア内における位置は考慮しない）
+print("alt:", current_z)  # current_zには各エリア最終点における高度を格納（ただし、S/Gのエリア内における位置は考慮しない）
 
 # エリアを切り出し
 cut_area = []
-
+#print(cut_area)
 for i in range(order):
-    temp_x = 50 * area_route[order - i - 1][0]
-    temp_y = 50 * area_route[order - i - 1][1]
-    cut_area.append(dp[50 * temp_x : 50 * (temp_x + 1), 50 * temp_y : 50 * (temp_y + 1)])
-
-print(dp[50 * 0 : 50 * 1, 50 * 0 : 50 * 1]) #切り出せてるっぽい
+    temp_x = area_size * area_route[order - i - 1][0]
+    temp_y = area_size * area_route[order - i - 1][1]
+    cut_area.append(dp[temp_x: (temp_x + area_size), temp_y: (temp_y + area_size)])
+    
+print(cut_area)
+#print(dp[50 * 0 : 50 * 1, 50 * 0 : 50 * 1]) #切り出せてるっぽい
 
