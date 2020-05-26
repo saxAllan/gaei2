@@ -20,5 +20,6 @@ dp[goal_x][goal_y][goal_z][1] = 2
 
 #50x50の100エリアに分割
 div = np.zeros((amo // 50, amo // 50, 2), dtype=int)
-
-print(div)
+area_goal_x = goal_x // 50
+area_goal_y = goal_y // 50
+print(area_goal_x, " ", area_goal_y)
