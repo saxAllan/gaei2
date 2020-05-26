@@ -1,3 +1,5 @@
+#divide (now developping)
+
 import numpy as np
 import math
 import yuki2d
