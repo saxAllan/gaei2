@@ -42,12 +42,12 @@ for i in range(order):
 print(area_route)
 
 #高度差をエリアでならす
-z_diff_area = (goal_z - start_z)
+z_diff_area = (goal_z - start_z)  # current_zには各エリア最終点における高度を格納（ただし、S/Gのエリア内における位置は考慮しない）
 current_z = np.zeros(order, dtype=int)
 for i in range(order-1):
     current_z[i] = start_z + math.ceil(z_diff_area * (i + 1) / order)
 current_z[order - 1] = goal_z
-print("alt:", current_z)  # current_zには各エリア最終点における高度を格納（ただし、S/Gのエリア内における位置は考慮しない）
+print("alt:", current_z)
 
 # エリアを切り出し
 cut_area = []
@@ -55,5 +55,8 @@ for i in range(order):
     temp_x = area_size * area_route[order - i - 1][0]
     temp_y = area_size * area_route[order - i - 1][1]
     cut_area.append(dp[temp_x: (temp_x + area_size), temp_y: (temp_y + area_size)]) # <np.array>を要素として持つ<標準リスト>
-#print(cut_area)
 
+# エリア内のSTART/GOALを定義
+
+
+#このあたりでbeta_3d_def.beta_3dを呼ぶ
