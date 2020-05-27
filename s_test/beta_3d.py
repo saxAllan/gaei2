@@ -1,4 +1,4 @@
-#3d_alpha.py ver 0.3 20200521
+#beta_3d.py ver 0.5 20200527
 
 import numpy as np
 
