@@ -1,4 +1,4 @@
-#divide (now developping)
+#divide (now developing)
 
 import numpy as np
 import math
@@ -54,7 +54,6 @@ cut_area = []
 for i in range(order):
     temp_x = area_size * area_route[order - i - 1][0]
     temp_y = area_size * area_route[order - i - 1][1]
-    cut_area.append(dp[temp_x: (temp_x + area_size), temp_y: (temp_y + area_size)]) # <np.array>を要素として持つ<標準リスト>が完成！
-print(cut_area)
-#print(dp[50 * 0 : 50 * 1, 50 * 0 : 50 * 1]) #切り出せてるっぽい
+    cut_area.append(dp[temp_x: (temp_x + area_size), temp_y: (temp_y + area_size)]) # <np.array>を要素として持つ<標準リスト>
+#print(cut_area)
 
