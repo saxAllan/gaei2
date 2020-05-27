@@ -10,7 +10,7 @@ start_x = 0
 start_y = 0
 start_z = 0
 
-next = []  # 次訪問したいリスト[x,y]
+next = []  # 次訪問したいリスト[x,y,z]
 dp = [[[[0, 0] for i in range(amo)] for j in range(amo)] for k in range(amo)]  # [cost, visited]
 
 def startInit(x, y, z):
@@ -31,12 +31,12 @@ startInit(start_x, start_y, start_z)
 goalInit(goal_x, goal_y, goal_z)
 obstInit(1, 1, 1, 2, 2, 2)  # 障害物
 
-def search_sub(x, y, z):
+def search_sub(x, y, z, stx, sty, stz):
     if dp[x][y][z][1] != 2: 
-        dp[x][y][z] = [dp[x][y][z][0] + 1, 11]  # 訪問済み
+        dp[x][y][z] = [dp[stx][sty][stz][0] + 1, 11]  # 訪問済み
         next.append([x, y, z])  # 次訪問リストに追加
     else:
-        dp[x][y][z] = [dp[x][y][z][0] + 1, 16] # 訪問済みゴール(16)
+        dp[x][y][z] = [dp[stx][sty][stz][0] + 1, 16] # 訪問済みゴール(16)
 
 def search(stx, sty, stz):
     x = stx
@@ -45,29 +45,29 @@ def search(stx, sty, stz):
     #1
     x += 1
     if (x < amo and dp[x][y][z][1] % 5 != 1): # 範囲 & スタート(1)または障害物(6)または訪問済み(11)または訪問済みゴール(16)
-        search_sub(x, y, z)
+        search_sub(x, y, z, stx, sty, stz)
     #2
     x -= 2
     if (x >= 0 and dp[x][y][z][1] % 5 != 1): # 範囲 & スタート(1)または障害物(6)または訪問済み(11)または訪問済みゴール(16)
-        search_sub(x, y, z)
+        search_sub(x, y, z, stx, sty, stz)
     #3
     x += 1
     y -= 1
     if (y >= 0  and dp[x][y][z][1] % 5 != 1): # 範囲 & スタート(1)または障害物(6)または訪問済み(11)または訪問済みゴール(16)
-        search_sub(x, y, z)
+        search_sub(x, y, z, stx, sty, stz)
     #4
     y += 2
     if (y < amo and dp[x][y][z][1] % 5 != 1): # 範囲 & スタート(1)または障害物(6)または訪問済み(11)または訪問済みゴール(16)
-        search_sub(x, y, z)
+        search_sub(x, y, z, stx, sty, stz)
     #5
     y -= 1
     z -= 1
     if (z >= 0 and dp[x][y][z][1] % 5 != 1): # 範囲 & スタート(1)または障害物(6)または訪問済み(11)または訪問済みゴール(16)
-        search_sub(x, y, z)
+        search_sub(x, y, z, stx, sty, stz)
     #6
     z += 2
     if (z < amo and dp[x][y][z][1] % 5 != 1): # 範囲 & スタート(1)または障害物(6)または訪問済み(11)または訪問済みゴール(16)
-        search_sub(x, y, z)   
+        search_sub(x, y, z, stx, sty, stz)
 
 while(len(next) != 0):
     search(next[0][0], next[0][1], next[0][2])
