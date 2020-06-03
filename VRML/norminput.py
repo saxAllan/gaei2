@@ -1,14 +1,14 @@
 #読み込み
+#最終的なデータはdata[][]
 
 print("\n========================================")
-print("  norminput Ver. 3.2 (20191214)")
+print("  norminput Ver. 3.3 (20200601)")
 print("========================================\n")
 
 from operator import itemgetter
 
 #読み込み
 filename_i = input("入力ファイル名（拡張子は不要）：")
-#filename_o = input("出力ファイル名（拡張子は不要）：")
 print(filename_i + ".datを読み込んでいます...  ")
 f = open(filename_i + ".dat", "r")
 lines = f.readlines()
@@ -44,8 +44,6 @@ while(1):
         count_x += 1
         i += 1
     count_y = len(orgdata) // count_x
-    #data = [[0]*count_y] * count_x
-    #data = [[]] * count_x
     data = []
     for i in range(count_x):
         data.append([])
