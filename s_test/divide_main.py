@@ -1,10 +1,15 @@
-#divide (now developing)
 
 import numpy as np
 import math
+import norminput
+import obst_judge
 import yuki2d
 
-amo = 4 # セルの縦横の値 (org=500)
+print("\n========================================")
+print("  divide Ver. 1.1 (20200601)")
+print("========================================\n")
+
+amo = norminput. # セルの縦横の値 (org=500)
 height = 4  # セルの高さの値
 goal_x = 3  # ゴールの座標x (org=470)
 goal_y = 3  # ゴールの座標y (org=470)
