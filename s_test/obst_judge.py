@@ -6,8 +6,9 @@ print("\n========================================")
 print("  obst_judge Ver. 0.1 (20200601)")
 print("========================================\n")
 
-#dp = [[[[1] for i in range(1000)] for j in range(1000)] for k in range(100)]  # [通行不可=0, 通行可=1]
-dp = np.ones((norminput.count_x, norminput.count_y, 150, 1), dtype=int)
+height = 150
+
+dp = np.ones((norminput.count_x, norminput.count_y, height, 1), dtype=int) # [通行不可=0, 通行可=1]
 
 for i in range(norminput.count_x):
     print("\r", i, "/", norminput.count_x, end="")
