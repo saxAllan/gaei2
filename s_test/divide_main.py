@@ -9,20 +9,20 @@ print("\n========================================")
 print("  divide Ver. 1.1 (20200601)")
 print("========================================\n")
 
-amo = norminput. # セルの縦横の値 (org=500)
-height = 4  # セルの高さの値
+amo = norminput.count_x # セルの縦横の値 (org=500)
+height = obst_judge.height  # セルの高さの値(obst)
 goal_x = 3  # ゴールの座標x (org=470)
 goal_y = 3  # ゴールの座標y (org=470)
 goal_z = 3 # ゴールの座標z
 start_x = 0
 start_y = 0
 start_z = 0
-area_size = 2  # 分割時の縦横 (org=50)
+area_size = 50  # 分割時の縦横 (org=50)
 
 dp = np.zeros((amo, amo, height, 2), dtype=int)
 #print(dp)
 
-dp[start_x][start_y][start_z][1] = 1
+dp[start_x][start_y][start_z][1] = 1 #この辺のdpみんなobst_judgeのやつにできる？
 dp[goal_x][goal_y][goal_z][1] = 2
 
 #50x50の100エリアに分割
