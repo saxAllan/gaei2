@@ -1,0 +1,169 @@
+#VRML V2.0 utf8
+DEF UFO Transform{
+  translation 95 7 -16
+  children[
+    Transform{
+      translation 0 1.3 0
+      scale 2 1 2
+      children[
+        Shape{
+          appearance Appearance{
+            material Material{}
+          }
+          geometry Sphere {
+            radius 0.5
+          }
+        }
+      ]
+    }
+    Transform{
+      translation 0 1 0
+      scale 3 1 3
+      children[
+        Shape{
+          appearance Appearance{
+            material Material{}
+          }
+          geometry Sphere {
+            radius 0.5
+          }
+        }
+      ]
+    }
+    Transform{
+      translation 0 0.8 1
+      children[
+        Shape{
+          appearance Appearance{
+            material Material{
+              diffuseColor 1 1 0
+            }
+           }
+          geometry Sphere {
+            radius 0.5
+          }
+        }
+      ]
+    }
+    Transform{
+      rotation 0 1 0 1.04
+      children[
+        Transform{
+          translation 0 0.8 1
+          children[
+            Shape{
+              appearance Appearance{
+                material Material{
+                  diffuseColor 1 1 0
+                }
+              }
+              geometry Sphere {
+                radius 0.5
+              }
+            }
+          ]
+        }  
+      ]
+    }
+    Transform{
+      rotation 0 1 0 2.09
+      children[
+        Transform{
+          translation 0 0.8 1
+          children[
+            Shape{
+              appearance Appearance{
+                material Material{
+                  diffuseColor 1 1 0
+                }
+              }
+              geometry Sphere {
+                radius 0.5
+              }
+            }
+          ]
+        }  
+      ]
+    }
+    Transform{
+      rotation 0 1 0 3.14
+      children[
+        Transform{
+          translation 0 0.8 1
+          children[
+            Shape{
+              appearance Appearance{
+                material Material{
+                  diffuseColor 1 1 0
+                }
+              }
+              geometry Sphere {
+                radius 0.5
+              }
+            }
+          ]
+        }  
+      ]
+    }
+    Transform{
+      rotation 0 1 0 4.18
+      children[
+        Transform{
+          translation 0 0.8 1
+          children[
+            Shape{
+              appearance Appearance{
+                material Material{
+                  diffuseColor 1 1 0
+                }
+              }
+              geometry Sphere {
+                radius 0.5
+              }
+            }
+          ]
+        }  
+      ]
+    }
+    Transform{
+      rotation 0 1 0 5.23
+      children[
+        Transform{
+          translation 0 0.8 1
+          children[
+            Shape{
+              appearance Appearance{
+                material Material{
+                  diffuseColor 1 1 0
+                }
+              }
+              geometry Sphere {
+                radius 0.5
+              }
+            }
+          ]
+        }  
+      ]
+    }
+    Transform{
+      rotation 0 1 0 6.28
+      children[
+        Transform{
+          translation 0 0.8 1
+          children[
+            Shape{
+              appearance Appearance{
+                material Material{
+                  diffuseColor 1 1 0
+                }
+              }
+              geometry Sphere {
+                radius 0.5
+              }
+            }
+          ]
+        }  
+      ]
+    }
+  ]
+}
