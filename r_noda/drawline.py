@@ -18,7 +18,7 @@ cv2.line(img,(100,200),(200,200),(255,0,0),3)
 cv2.line(img,(200,200),(200,400),(255,0,0),3)
 cv2.line(img,(200,400),(500,400),(255,0,0),3)
 
-cv2.imwrite("line",img) #別ウィンドウを開き(ウィンドウ名 "line")オブジェクトimgを表示
+cv2.imwrite("line.jpg",img) #別ウィンドウを開き(ウィンドウ名 "line")オブジェクトimgを表示
              
 cv2.waitKey(0) #キー入力待ち
 cv2.destroyAllWindows() #ウインドウを閉じる
