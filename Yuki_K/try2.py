@@ -4,11 +4,11 @@ INF = 10000
 END = 20000
 OBS = 20001
 
-#関数化
+# 関数化
 
 n = 20  # 縦横セル数
 start = (0, 0)  # 始点
-goal = (8,9)
+goal = (8, 9)
 height = 20
 obst = [(2, 2), (2, 3)]
 
@@ -25,7 +25,7 @@ def cdToSuf(cd):  # 座標→平坦配列
 
 
 def sufToCd(suf):  # 平坦配列→座標
-    return (suf%n, suf // n)
+    return (suf % n, suf // n)
 
 
 def setObst(cd):  # 障害物設定
@@ -56,29 +56,32 @@ def searchDist(v):  # 周囲の点を見る
             update(x, v, 1)
         for j in [-1, 1]:
             x = v+i*n+j
-            if(x >= 0 and x < size and abs(v//n - x//n)==1):  # ナナメ
-                if(unSearch[v+i*n]!=OBS and unSearch[v+j]!=OBS):  # 障害除外
+            if(x >= 0 and x < size and abs(v//n - x//n) == 1):  # ナナメ
+                if(unSearch[v+i*n] != OBS and unSearch[v+j] != OBS):  # 障害除外
                     update(x, v, 1.5)
+
 
 def searchRoute():
     place = cdToSuf(goal)
     nextP = parent[place]
-    while(nextP!=-1):
-        route.insert(0,sufToCd(place))
+    while(nextP != -1):
+        route.insert(0, sufToCd(place))
         place = nextP
         nextP = parent[place]
-    route.insert(0,sufToCd(place))
+    route.insert(0, sufToCd(place))
 
-def upHeight(): #後ろから高度を加算
+
+def upHeight():  # 後ろから高度を加算
     for e in route:
-        routeHeight.append([e[0],e[1],0])
+        routeHeight.append([e[0], e[1], 0])
     width = len(route) - 1
     i = width - 1
     j = height
-    while(j>0):
-        routeHeight[i+1][2]+=1
-        i = (i-1)%width
+    while(j > 0):
+        routeHeight[i+1][2] += 1
+        i = (i-1) % width
         j -= 1
+
 
 for i in range(size-len(obst)):
     # 距離が最小値の点を抽出
@@ -93,19 +96,19 @@ print(routeHeight)
 
 d1 = draw.Draw(30, n)
 for i in range(size):
-    if(unSearch[i]==20001):
-        d1.drawObst(sufToCd(i), (192,192,192))
+    if(unSearch[i] == 20001):
+        d1.drawObst(sufToCd(i), (192, 192, 192))
 
 for i in range(size):
     if(parent[i] != -1):
-        d1.drawLine(sufToCd(i), sufToCd(parent[i]), (0,0,255))
+        d1.drawLine(sufToCd(i), sufToCd(parent[i]), (0, 0, 255))
 
 for i in range(size):
-    if(unSearch[i]==20001):
-        col=(128,128,128)
+    if(unSearch[i] == 20001):
+        col = (128, 128, 128)
     else:
-        col=(0,128,0)
-        d1.drawChara(sufToCd(i),str(dist[i]))
+        col = (0, 128, 0)
+        d1.drawChara(sufToCd(i), str(dist[i]))
     d1.drawRect(sufToCd(i), col)
 
 d1.show()
