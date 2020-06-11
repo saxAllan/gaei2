@@ -4,14 +4,20 @@ INF = 10000
 END = 20000
 OBS = 20001
 
-n = 7  # 縦横セル数
+#関数化
+
+n = 20  # 縦横セル数
 start = (0, 0)  # 始点
+goal = (8,9)
+height = 20
 obst = [(2, 2), (2, 3)]
 
 size = n*n
 dist = [-1 for i in range(size)]  # 決定距離
 unSearch = [INF for i in range(size)]  # 未定距離)未探索:INF,決定済み:END,障害:OBS
 parent = [-1 for i in range(size)]  # 親
+route = []
+routeHeight = []
 
 
 def cdToSuf(cd):  # 座標→平坦配列
@@ -40,7 +46,7 @@ def update(x, v, p):  # 距離更新
             parent[x] = v
 
 
-def around(v):  # 周囲の点を見る
+def searchDist(v):  # 周囲の点を見る
     for i in [-1, 1]:
         x = v+i
         if(v//n == x//n):  # 横
@@ -54,18 +60,36 @@ def around(v):  # 周囲の点を見る
                 if(unSearch[v+i*n]!=OBS and unSearch[v+j]!=OBS):  # 障害除外
                     update(x, v, 1.5)
 
+def searchRoute():
+    place = cdToSuf(goal)
+    nextP = parent[place]
+    while(nextP!=-1):
+        route.insert(0,sufToCd(place))
+        place = nextP
+        nextP = parent[place]
+    route.insert(0,sufToCd(place))
+
+def upHeight(): #後ろから高度を加算
+    for e in route:
+        routeHeight.append([e[0],e[1],0])
+    width = len(route) - 1
+    i = width - 1
+    j = height
+    while(j>0):
+        routeHeight[i+1][2]+=1
+        i = (i-1)%width
+        j -= 1
 
 for i in range(size-len(obst)):
     # 距離が最小値の点を抽出
     v = unSearch.index(min(unSearch))
     dist[v] = unSearch[v]
     unSearch[v] = END
-    print(v)
-    around(v)
+    searchDist(v)
 
-    print("ds:", dist)
-    print("uS:", unSearch)
-    print("pr:", parent)
+searchRoute()
+upHeight()
+print(routeHeight)
 
 d1 = draw.Draw(30, n)
 for i in range(size):
