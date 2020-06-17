@@ -13,6 +13,11 @@ class Dijkstra:
 
     #d = Dijkstra(20, (0, 0), (8, 9), 20, [(2, 2), (2, 3)])
     def __init__(self, n, start, goal, height, obst):
+        print("\n========================================")
+        print("  dijkstra <original> Ver. 0.1 (20200611)")
+        print("========================================\n")
+
+
         self.n = n  # 縦横セル数
         self.start = start  # 始点
         self.goal = goal #終点
