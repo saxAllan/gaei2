@@ -19,10 +19,11 @@ dist_y = int(input("y:"))
 dist_z = int(input("z:"))
 
 obst = []
+for i in range(norminput.count_x):
+    for j in range(norminput.count_y):
+        for k in range(int(norminput.data[i][j][0]) + 1):
+            obst.append((i, j, k))
 
-
-d = dijkstra.Dijkstra(norminput.count_x, (start_x, start_y), (dist_x, dist_y), dist_z - start_z, obst)
-
-#d = dijkstra.Dijkstra(20, (0, 0), (8, 9), 20, [(2, 2), (2, 3)]) #縦横, start, dist, 高度差, obst
+d = dijkstra.Dijkstra(norminput.count_x, (start_x, start_y), (dist_x, dist_y), dist_z - start_z, obst) #縦横, start, dist, 高度差, obst
 d.search()
 print(d.routeHeight)
