@@ -18,11 +18,24 @@ dist_x = int(input("x:"))
 dist_y = int(input("y:"))
 dist_z = int(input("z:"))
 
+
+if (start_z > dist_z):
+    search_z = start_z
+else:
+    search_z = dist_z
+
 obst = []
+
+for i in range(norminput.count_x):
+    for j in range(norminput.count_y):
+        if norminput.data[i][j][0] >= search_z:
+            obst.append((i, j)) #高度 search_z におけるobst（2次元）
+'''
 for i in range(norminput.count_x):
     for j in range(norminput.count_y):
         for k in range(int(norminput.data[i][j][0]) + 1):
             obst.append((i, j, k))
+'''
 
 d = dijkstra.Dijkstra(norminput.count_x, (start_x, start_y), (dist_x, dist_y), dist_z - start_z, obst) #縦横, start, dist, 高度差, obst
 d.search()
