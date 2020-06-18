@@ -76,6 +76,9 @@ class Dijkstra:
             self.routeHeight[i+1][2]+=1
             i = (i-1)%width
             j -= 1
+        z=0
+        for i in range(len(self.routeHeight)-1): #z座標：差から累積に
+            self.routeHeight[i+1][2] += self.routeHeight[i][2]
 
     def search(self):
         for i in range(self.size-len(self.obst)):
