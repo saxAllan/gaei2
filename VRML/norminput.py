@@ -74,6 +74,6 @@ for i in range(count_y):
         temp = float(orgdata[(i * count_x) + j][2])
         data[j].append([])
         data[j][i].append(temp)
-        data[j][i].append(1)
+        #data[j][i].append(1)
     print("\r", i + 1, "/", count_y, "   ", end="")
 print("処理完了")
