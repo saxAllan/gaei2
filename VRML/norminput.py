@@ -2,7 +2,7 @@
 #最終的なデータはdata[][]
 
 print("\n========================================")
-print("  norminput Ver. 3.4 (20200618)")
+print("  norminput Ver. 3.5 (20200701)")
 print("========================================\n")
 
 from operator import itemgetter
@@ -55,10 +55,10 @@ if seikika == "Y" or seikika == "y":
         # 正規化チェック
         print("x=", count_x, "y=", count_y)
         if count_x * count_y == size_org:
-            print("正規化完了")
+            print("正規化処理完了")
             break
         else:
-            print("続行")
+            print("正規化処理に失敗しましたが、続行します")
             from operator import itemgetter
             b = sorted(orgdata, key=itemgetter(0))
 
@@ -88,7 +88,9 @@ else:
     # 正規化チェック
     print("x=", count_x, "y=", count_y)
     if count_x * count_y == size_org:
-        print("正規化完了")
+        print("正規化処理をスキップしました\nこのデータは正規化されています")
+    else:
+        print("正規化処理をスキップしましたが、正規化されていない可能性があります")
 
 
 #2次元配列化
