@@ -2,13 +2,13 @@
 #最終的なデータはdata[][]
 
 print("\n========================================")
-print("  norminput Ver. 3.5 (20200701)")
+print("  norminput Ver. 3.5 (20200702)")
 print("========================================\n")
 
 from operator import itemgetter
 
 #読み込み
-filename_i = input("入力ファイル名（拡張子は不要）：")
+filename_i = input(".datデータのファイル名を入力してください（拡張子は不要）：")
 seikika = input("正規化しますか？（Y/N）：")
 print(filename_i + ".datを読み込んでいます...  ")
 f = open(filename_i + ".dat", "r")

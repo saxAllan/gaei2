@@ -9,7 +9,7 @@ print("\n========================================")
 print("  output Ver. 2.13 (20200702)")
 print("========================================\n")
 
-print("\n\n注：Linux 環境では X Window System が使えるようにして下さい\nX Window System が利用できない環境で動作させると途中で止まります")
+print("注：\nLinux 環境では X Window System が使えるようにして下さい\nX Window System が利用できない環境で動作させると途中で止まります\n")
 
 newdata = []
 zdata = []
@@ -20,7 +20,7 @@ for i in range(norminput.count_y):
         zdata.append(norminput.data[j][i][0])
         newdata.append(j)
         newdata.append(i)
-print(norminput.count_x)
+print("横幅", norminput.count_x)
 print("Delaunay 処理中")
 pts = np.array(newdata).reshape(-1, 2)
 ztmp = np.array(zdata)
@@ -35,7 +35,7 @@ fig = plt.figure()
 print("Delaunay 処理完了   (len(pts)=", len(pts), "), (len(pts[tri.simplices])=", len(pts[tri.simplices]), ")")
 
 #出力
-filename_o = input("出力ファイル名（拡張子は不要）：")
+filename_o = input("出力する.wrlのファイル名を入力してください（拡張子は不要）：")
 outfile = open(filename_o + '.wrl', 'w')
 print("出力処理中...")
 
