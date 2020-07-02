@@ -8,11 +8,11 @@ import sys
 
 xSIZE = 100
 ySIZE = 100
-zSIZE = 100
+zSIZE = 20
 N = xSIZE*ySIZE*zSIZE
 start = 0  # NUM形式
 end = 6  # NUM形式
-obst = [[1, 0, 0], [2, 2, 1]]
+obst = [[[1, 0, 0], [2, 2, 1]], [[5, 1, 0], [7, 4, 0]]]
 data = []
 row = []
 col = []
@@ -26,19 +26,49 @@ def num(x, y, z):  # 番号に直す
     return x+y*xSIZE+z*(xSIZE*ySIZE)
 
 
-def makeData(d, i, j):
+def appendData(d, i, j):
     if d > 0:
         data.append(d)
         row.append(i)
         col.append(j)
 
 
-def init():
+def writeList():
+    l = [data, row, col]
+    rwIndex = ["data", "row", "col"]
+    for i in range(3):
+        path = rwIndex[i] + "_" + \
+            str(xSIZE) + "_" + str(ySIZE) + "_" + str(zSIZE) + ".dat"
+        s = ""
+        for e in l[i]:
+            s += str(e)+" "
+        with open(path, mode='w') as f:
+            f.write(s)
+
+
+def readData():
+    rwIndex = ["data", "row", "col"]
+    for i in range(3):
+        path = rwIndex[i] + "_" + \
+            str(xSIZE) + "_" + str(ySIZE) + "_" + str(zSIZE) + ".dat"
+        with open(path) as f:
+            s = f.read().split()
+        if i == 0:
+            for i in range(len(s)):
+                data.append(float(s[i]))
+        elif i == 1:
+            for i in range(len(s)):
+                row.append(int(s[i]))
+        elif i == 2:
+            for i in range(len(s)):
+                col.append(int(s[i]))
+
+
+def createData():
     for i in range(N):
         if i % 10000 == 0:
-            sys.stdout.write("\r処理中: "+str((int)(i/N*100))+"%")
+            sys.stdout.write("\rデータ生成中: "+str((int)(i/N*100))+"%")
             sys.stdout.flush()
-        chkList = []
         location = cd(i)
         for a in range(-1, 2):
             for b in range(-1, 2):
@@ -54,15 +84,54 @@ def init():
                             elif dist > 1:
                                 cnt = 0
                                 break
-                        makeData(np.sqrt(cnt), i, ap)
-        # print(chkList)
-    return coo_matrix((data, (row, col)), (N, N)).tocsr()
+                        appendData(np.sqrt(cnt), i, ap)
+    sys.stdout.write("\r生成完了: 100%             \n")
+    sys.stdout.flush()
+
+
+def setObst():
+    for obstRange in obst:
+        rStart = obstRange[0]
+        rEnd = obstRange[1]
+        for i in range(rStart[0], rEnd[0]+1):
+            for j in range(rStart[1], rEnd[1]+1):
+                for k in range(rStart[2], rEnd[2]+1):
+                    if (i+j+k)%3==0:
+                        sys.stdout.write("\r障害物設定中.  ")
+                    elif (i+j+k)%3==1:
+                        sys.stdout.write("\r障害物設定中 . ")
+                    elif (i+j+k)%3==2:
+                        sys.stdout.write("\r障害物設定中  .")
+                    sys.stdout.flush()
+                    obstNum = num(i, j, k)
+                    cnt = 0
+                    while cnt < len(data):
+                        if(col[cnt] == obstNum or row[cnt] == obstNum):
+                            del col[cnt]
+                            del row[cnt]
+                            del data[cnt]
+                        else:
+                            cnt += 1
+    sys.stdout.write("\r障害物設定完了    \n")
+    sys.stdout.flush()
+
+
+def init(mode):
+    if mode == 1:  # １から生成（mode=1)
+        createData()
+    elif mode == 2:  # １から生成＋ファイル書き込み（mode=2)
+        createData()
+        writeList()
+    elif mode == 3:  # ファイルから読み込み（mode=3)
+        readData()
+        print("読み込み完了")
+    setObst()
+    return csr_matrix((data, (row, col)), (N, N))
 # 障害物部分を0にする必要がある
 
 
-def path(ar):
-    #d, p = shortest_path(ar, indices=start, return_predecessors=True)
-    d, p = shortest_path(ar, indices=start, directed=False,
+def searchPath(csr):  # Scipy経路探索
+    d, p = shortest_path(csr, indices=start, directed=False,
                          return_predecessors=True)
     path = []
     i = end
@@ -72,17 +141,12 @@ def path(ar):
     if i < 0:
         return []
     path.append(i)
-    # ☆return -> path[::-1]
     ans = path[::-1]
     for j in range(len(ans)):
         ans[j] = cd(ans[j])
     return ans
 
 
-ar = init()
+csr = init(1)
 
-print("")
-
-#print(ar)
-
-print(path(ar))
+print(searchPath(csr))
