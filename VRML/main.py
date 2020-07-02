@@ -6,9 +6,10 @@ import norminput
 import mpointsl
 
 print("\n========================================")
-print("  out3 Ver. 2.12 (20200701)")
+print("  output Ver. 2.13 (20200702)")
 print("========================================\n")
 
+print("\n\n注：Linux 環境では X Window System が使えるようにして下さい\nX Window System が利用できない環境で動作させると途中で止まります")
 
 newdata = []
 zdata = []
