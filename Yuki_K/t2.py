@@ -127,7 +127,7 @@ def init(mode):
         print("読み込み完了")
     setObst()
     return csr_matrix((data, (row, col)), (N, N))
-# 障害物部分を0にする必要がある
+
 
 
 def searchPath(csr):  # Scipy経路探索
