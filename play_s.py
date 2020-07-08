@@ -7,7 +7,6 @@ print("\n========================================")
 print("  play Ver. 1.0 (20200708)")
 print("========================================\n")
 
-
 print("現在地の座標を入力：")
 start_x = int(input("x:"))
 start_y = int(input("y:"))
@@ -29,7 +28,20 @@ for i in range(norminput.count_x):
             obst[obst_count].append([i, j, int(norminput.data[i][j][0]) + 1])
             obst_count += 1
 
-#print(obst)
-
 s = Sci.SciSearch([50, 50, 50], [start_x, start_y, start_z], [dist_x, dist_y, dist_z], obst, 1) #(サイズ,始点,終点,障害物,モード)
 
+path = s.search()
+
+
+#ここから元play_n
+out = ""
+for i in range(len(path)):
+    print("\r", i, end="  ")
+    out += str(d.routeHeight[i][0])+" "
+    out += str(d.routeHeight[i][1])+" "
+    out += str(d.routeHeight[i][2])+"\n"
+
+f = open("route.txt", mode="w")
+f.write(out)
+f.close()
+print("route.txt に追記しました")
