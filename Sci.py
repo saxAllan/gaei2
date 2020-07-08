@@ -13,12 +13,17 @@ class SciSearch:
         return x+y*self.xSIZE+z*(self.xSIZE*self.ySIZE)
 
     def _setObst(self):
+        status = 0
         for obstRange in self.obst:
+            print("\r障害物設定中... ", status, "/", len(self.obst), end="")
+            status += 1
+            sys.stdout.flush()
             rStart = obstRange[0]
             rEnd = obstRange[1]
-            for i in range(rStart[0], rEnd[0]+1):
+            for i in range(rStart[0], rEnd[0] + 1):
                 for j in range(rStart[1], rEnd[1]+1):
-                    for k in range(rStart[2], rEnd[2]+1):
+                    for k in range(rStart[2], rEnd[2] + 1):
+                        '''
                         if (i+j+k) % 3 == 0:
                             sys.stdout.write("\r障害物設定中.  ")
                         elif (i+j+k) % 3 == 1:
@@ -26,6 +31,7 @@ class SciSearch:
                         elif (i+j+k) % 3 == 2:
                             sys.stdout.write("\r障害物設定中  .")
                         sys.stdout.flush()
+                        '''
                         obstNum = self._num(i, j, k)
                         cnt = 0
                         while cnt < len(self.data):
@@ -35,6 +41,7 @@ class SciSearch:
                                 del self.data[cnt]
                             else:
                                 cnt += 1
+
         sys.stdout.write("\r障害物設定完了    \n")
         sys.stdout.flush()
 
