@@ -21,37 +21,6 @@ class SciSearch:
                 lil[obstNum, :] = 0
         self.csr = lil.tocsr()  # スライスができる！！！！！(7/9更新)
 
-    def _readData(self):
-        rwIndex = ["data", "row", "col"]
-        for i in range(3):
-            path = rwIndex[i] + "_" + \
-                str(self.xSIZE) + "_" + str(self.ySIZE) + \
-                "_" + str(self.zSIZE) + ".dat"
-            with open(path) as f:
-                s = f.read().split()
-            if i == 0:
-                for i in range(len(s)):
-                    self.data.append(float(s[i]))
-            elif i == 1:
-                for i in range(len(s)):
-                    self.row.append(int(s[i]))
-            elif i == 2:
-                for i in range(len(s)):
-                    self.col.append(int(s[i]))
-
-    def _writeList(self):
-        l = [self.data, self.row, self.col]
-        rwIndex = ["data", "row", "col"]
-        for i in range(3):
-            path = rwIndex[i] + "_" + \
-                str(self.xSIZE) + "_" + str(self.ySIZE) + \
-                "_" + str(self.zSIZE) + ".dat"
-            s = ""
-            for e in l[i]:
-                s += str(e)+" "
-            with open(path, mode='w') as f:
-                f.write(s)
-
     def _appendData(self, d, i, j):
         if d > 0:
             self.data.append(d)
