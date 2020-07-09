@@ -16,4 +16,4 @@ for i in range(len(d.routeHeight)):
 f=open("route.txt",mode="w")
 f.write(out)
 f.close()
-print("route.txt に書き込みました")
+print("route.txt に追記しました")
