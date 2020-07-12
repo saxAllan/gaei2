@@ -25,7 +25,6 @@ for i in range(norminput.count_x):
     for j in range(norminput.count_y):
         if norminput.data[i][j][0] != 0:
             obst.append([i, j, math.ceil(norminput.data[i][j][0])])
-print(len(obst))
 
 s = Sci.SciSearch([50, 50, 50], [start_x, start_y, start_z], [dist_x, dist_y, dist_z], obst, 1) #(サイズ,始点,終点,障害物,モード)
 
