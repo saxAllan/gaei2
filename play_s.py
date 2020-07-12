@@ -26,18 +26,18 @@ for i in range(norminput.count_x):
         if norminput.data[i][j][0] != 0:
             obst.append([i, j, math.ceil(norminput.data[i][j][0])])
 
-s = Sci.SciSearch([50, 50, 50], [start_x, start_y, start_z], [dist_x, dist_y, dist_z], obst, 1) #(サイズ,始点,終点,障害物,モード)
+s = Sci.SciSearch([50, 50, 50], [start_x, start_y, start_z], [dist_x, dist_y, dist_z], obst, norminput.filename_i) #(サイズ,始点,終点,障害物,モード)
 
 path = s.search()
 
 
 #ここから元play_n
+print("VRMLデータに経路情報を記録しています．．．")
 out = ""
 for i in range(len(path)):
-    print("\r", i, end="  ")
-    out += str(d.routeHeight[i][0])+" "
-    out += str(d.routeHeight[i][1])+" "
-    out += str(d.routeHeight[i][2])+"\n"
+    out += str(path[i][0])+" "
+    out += str(path[i][1])+" "
+    out += str(path[i][2])+"\n"
 
 f = open("route.txt", mode="w")
 f.write(out)

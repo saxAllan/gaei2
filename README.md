@@ -8,5 +8,4 @@
 
 ### ファイル
 
-- dijkstra.py : ３D経路探索プログラム
-- play.py : dijkstra.py 呼び出し用のプログラム
+- play_s.py : 3D 経路探索用のプログラム（これを実行）
