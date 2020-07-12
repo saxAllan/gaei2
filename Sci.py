@@ -70,6 +70,11 @@ class SciSearch:
         self.row = []
         self.col = []
 
+        print("\n========================================")
+        print("  Sci Ver. 1.1 (20200712)")
+        print("========================================\n")
+
+
         fileName = "mat_" + str(self.xSIZE) + "_" + str(self.ySIZE) + \
             "_" + str(self.zSIZE) + "_" + datName + ".mat"
 
