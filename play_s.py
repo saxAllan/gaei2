@@ -30,10 +30,11 @@ s = Sci.SciSearch([50, 50, 50], [start_x, start_y, start_z], [dist_x, dist_y, di
 
 path = s.search()
 
+
 #ここから元play_n
+print("VRMLデータに経路情報を記録しています．．．")
 out = ""
 for i in range(len(path)):
-    print("\r", i, end="  ")
     out += str(path[i][0])+" "
     out += str(path[i][1])+" "
     out += str(path[i][2])+"\n"
