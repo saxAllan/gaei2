@@ -1,7 +1,6 @@
 import numpy as np
 import math
 import norminput
-import dijkstra
 import Sci
 
 print("\n========================================")
