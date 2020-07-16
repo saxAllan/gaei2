@@ -49,7 +49,7 @@ out += ("ROUTE PI2.value_changed TO UFO.set_translation\n")
 
 filename_o = input("適用先ファイル名（拡張子は不要）：")
 
-f = open(filename_o + ".wrl", "a    ")
+f = open(filename_o + ".wrl", "a")
 f.write(out)
 f.close()
 print(filename_o + ".wrl に経路情報を適用しました")
