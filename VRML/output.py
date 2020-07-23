@@ -18,7 +18,7 @@ with open('UFO.txt', 'r') as f:
     q += "DEF UFO Transform{\n"
     q += "  translation "
     q += str(orgdata[0][0])+" "+str(orgdata[0][1])+" "+str(orgdata[0][2])+"\n"
-    q += "0.5 0.5 0.5\n"
+    q += "  scale 0.5 0.5 0.5\n"
     q += "  rotation 1 0 0 1.570796326794897\n"
     q += p
 out = ("\n")
