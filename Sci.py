@@ -21,7 +21,7 @@ class SciSearch:
             status_permille=(int)(idx / len(self.obst) * 1000)
             status_time_now = time.time()
             if (status_permille != 0):
-                status_time_remaining = ((status_time_now - status_time_start) * 1000) / status_permille
+                status_time_remaining = ((status_time_now - status_time_start) * 1000-status_permille) / status_permille
                 sys.stdout.write("\r障害物設定中: " + str(status_permille) + "‰ (推定所要時間 あと"+str(int(status_time_remaining))+" 秒)")
             else:
                 sys.stdout.write("\r障害物設定中: " + str(status_permille) + "‰")
