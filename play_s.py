@@ -4,9 +4,17 @@ import norminput
 import Sci
 
 print("\n========================================")
-print("  play Ver. 1.3 (20200722)")
+print("  play Ver. 1.4 (20200722)")
 print("========================================\n")
 
+
+alt_max = max(norminput.alt)
+alt_min = min(norminput.alt)
+print("最高標高：", alt_max, ", 最低標高：", alt_min)
+alt_max = math.ceil(alt_max)
+alt_min=math.ceil(alt_min)
+offset = math.ceil(alt_min)
+print("offset:",offset)
 print("現在地の座標を入力：")
 start_x = int(input("x:"))
 start_y = int(input("y:"))
@@ -17,6 +25,8 @@ dist_x = int(input("x:"))
 dist_y = int(input("y:"))
 dist_z = int(input("z:"))
 
+
+#obst生成
 obst = []
 obst_count = 0
 
@@ -31,11 +41,11 @@ for i in range(norminput.count_x):
                    tmp_index.append([i + ii, j + jj])
             max_index = tmp.index(max(tmp))
             if math.ceil(norminput.data[tmp_index[max_index][0]][tmp_index[max_index][1]][0]) != 0:
-                obst.append([i, j, math.ceil(norminput.data[tmp_index[max_index][0]][tmp_index[max_index][1]][0])])
+                obst.append([i, j, math.ceil(norminput.data[tmp_index[max_index][0]][tmp_index[max_index][1]][0])-offset])
         elif norminput.data[i][j][0] != 0:
-            obst.append([i, j, math.ceil(norminput.data[i][j][0])])
+            obst.append([i, j, math.ceil(norminput.data[i][j][0])-offset])
 
-s = Sci.SciSearch([50, 50, 50], [start_x, start_y, start_z], [dist_x, dist_y, dist_z], obst, norminput.filename_i) #(サイズ,始点,終点,障害物,モード)
+s = Sci.SciSearch([norminput.count_x, norminput.count_y, alt_max-offset+1], [start_x, start_y, start_z-offset], [dist_x, dist_y, dist_z-offset], obst, norminput.filename_i) #(サイズ,始点,終点,障害物,モード)
 
 path = s.search()
 
@@ -46,7 +56,7 @@ out = ""
 for i in range(len(path)):
     out += str(path[i][0])+" "
     out += str(path[i][1])+" "
-    out += str(path[i][2])+"\n"
+    out += str(path[i][2]+offset)+"\n"
 
 f = open("route.txt", mode="w")
 f.write(out)
