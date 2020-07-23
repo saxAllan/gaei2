@@ -7615,6 +7615,7 @@ Material {}
 
 DEF UFO Transform{
   translation 1.0 1.0 1.0
+  scale 0.5 0.5 0.5
   rotation 1 0 0 1.570796326794897
   children[
     Transform{
