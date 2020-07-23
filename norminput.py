@@ -2,7 +2,7 @@
 #最終的なデータはdata[][]
 
 print("\n========================================")
-print("  norminput Ver. 3.5 (20200701)")
+print("  norminput Ver. 3.6 (20200723)")
 print("========================================\n")
 
 from operator import itemgetter
@@ -102,4 +102,10 @@ for i in range(count_y):
         data[j][i].append(temp)
         #data[j][i].append(1)
     print("\r", i + 1, "/", count_y, "   ", end="")
+print("処理完了")
+print("標高データ読み取り中")
+alt =[]
+for i in range(count_x):
+    for j in range(count_y):
+        alt.append(data[i][j][0])
 print("処理完了")
