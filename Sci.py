@@ -98,8 +98,7 @@ class SciSearch:
             print("ファイル書き込み完了:", fileName)
 
     def search(self):  # Scipy経路探索
-        d, p = shortest_path(self.csr, indices=self.start, directed=False,
-                             return_predecessors=True)
+        d, p = shortest_path(self.csr, indices=self.start, directed=False, return_predecessors=True)
         path = []
         i = self.end
         while i != self.start and i >= 0:
