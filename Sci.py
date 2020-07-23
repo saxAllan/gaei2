@@ -4,6 +4,7 @@ from scipy.sparse import lil_matrix, csr_matrix, coo_matrix
 from scipy import io, sparse
 import sys
 import os
+import time
 
 
 class SciSearch:
@@ -14,10 +15,17 @@ class SciSearch:
         return x+y*self.xSIZE+z*(self.xSIZE*self.ySIZE)
 
     def _setObst(self):
+        status_time_start = time.time()
         lil = self.csr.tolil()
         for idx, o in enumerate(self.obst):  # ステータス表示(7/11更新)
-            sys.stdout.write(
-                "\r障害物設定中: "+str((int)(idx/len(self.obst)*100))+"%")
+            status_permille=(int)(idx / len(self.obst) * 1000)
+            status_time_now = time.time()
+            if (status_permille != 0):
+                status_time_remaining = ((status_time_now - status_time_start) * 1000) / status_permille
+                sys.stdout.write("\r障害物設定中: " + str(status_permille) + "‰ (推定所要時間 あと"+str(status_time_remaining)+" 秒)")
+            else:
+                sys.stdout.write("\r障害物設定中: " + str(status_permille) + "‰")
+            
             sys.stdout.flush()
             for i in range(o[2]+1):  # obst入力方法更新！(7/9更新)
                 obstNum = self._num(o[0], o[1], i)
