@@ -11,7 +11,7 @@ python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sympy
 
 ## 呼び出し方
 
-実行するファイルは`play_sci.py`です。  
+実行するファイルは`pathfinding.py`です。  
 ~~~Python
 import Sci
 s = Sci.SciSearch([50, 50, 50], [0, 0, 0], [3, 2, 1], [[1, 0, 1], [2, 2, 1], [5, 1, 0], [7, 4, 0]], "fileName")
