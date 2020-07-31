@@ -2,9 +2,11 @@ import numpy as np
 import math
 import norminput
 import Sci
+import createworld
+import animation
 
 print("\n========================================")
-print("  play Ver. 1.4 (20200722)")
+print("  play Ver. 1.5 (20200731)")
 print("========================================\n")
 
 
@@ -25,6 +27,7 @@ dist_x = int(input("x:"))
 dist_y = int(input("y:"))
 dist_z = int(input("z:"))
 
+outwrlfilename = createworld.create_world(norminput.count_x, norminput.count_y, norminput.data)
 
 #obst生成
 obst = []
@@ -61,4 +64,6 @@ for i in range(len(path)):
 f = open("route.txt", mode="w")
 f.write(out)
 f.close()
-print("route.txt に追記しました")
+print("route.txt に経路情報を記録しました")
+
+animation.route_animation(outwrlfilename)
