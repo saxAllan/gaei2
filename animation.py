@@ -1,9 +1,12 @@
 #元output.py
 
 def route_animation(filename_o):
-    print("x座標,y座標,z座標が1行ごとに書かれているtxtファイルを用意してください\n")
 
-    print("route.txtを読み込んでいます...  ")
+    print("\n========================================")
+    print("  animation ver. 1.1")
+    print("========================================\n")
+
+    print("経路データ(route.txt)を読み込んでいます...  ")
     f = open("route.txt", "r")
     lines = f.readlines()
     orgdata = []
