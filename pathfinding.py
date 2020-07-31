@@ -6,7 +6,8 @@ import createworld
 import animation
 
 print("\n========================================")
-print("  play Ver. 1.5 (20200731)")
+print("  pathfinding for drone Ver. 1.5 (20200731)")
+print("  (play_s Ver. 1.6 (20200731))")
 print("========================================\n")
 
 
